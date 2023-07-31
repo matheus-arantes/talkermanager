@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
-const path = require('path');
+const { join } = require('path');
 
-const PATH_TALKER = path.resolve(__dirname, '../talker.json');
+const PATH_TALKER = join(__dirname, '..', 'talker.json');
 
 // ----------READ---------- //
 
@@ -14,6 +14,18 @@ const read = async () => {
         console.log(err);
     }
 };
+
+// ----------READ---------- //
+
+const readId = async (id) => {
+    try {
+        const file = await read();
+        const talkerById = file.find((talker) => talker.id === Number(id));
+        return talkerById;
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 // ----------WRITE---------- //
 
@@ -62,6 +74,7 @@ const deleteTalker = async (id) => {
 
 module.exports = {
     read,
+    readId,
     write,
     update,
     deleteTalker,
