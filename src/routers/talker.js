@@ -1,5 +1,8 @@
 const express = require('express');
-const path = require('path');
+const { read } = require('../utils/fs')
 
-const router = express.Router();
-const pathFs = path.resolve(__dirname, '../talker.json');
+const talker = express.Router();
+
+talker.get('/', async (req, res) => res.status(200).json(await read()));
+
+module.exports = { talker };

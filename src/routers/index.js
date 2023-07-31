@@ -1,8 +1,8 @@
 const express = require('express');
 const talker = require('./talker');
 
-const root = express.Router();
+const router = express.Router();
 
-root.use('/talker', talker);
+router.use('/talker', talker);
 
-module.exports = root;
+module.exports = router;
