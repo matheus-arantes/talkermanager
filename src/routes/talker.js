@@ -8,9 +8,8 @@ talker.get('/', async (_req, res) => res.status(200).json(await read()));
 talker.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const talkerInfo = await read();
         const filteredTalker = await readId(id);
-        if(filteredTalker) {
+        if (filteredTalker) {
             return res.status(200).json(filteredTalker);
         }
     } catch (err) {

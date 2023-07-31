@@ -23,9 +23,9 @@ const readId = async (id) => {
         const talkerById = file.find((talker) => talker.id === Number(id));
         return talkerById;
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
-}
+};
 
 // ----------WRITE---------- //
 
