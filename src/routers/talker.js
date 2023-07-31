@@ -1,5 +1,5 @@
 const express = require('express');
-const { read } = require('../utils/fs')
+const { read } = require('../utils/fs');
 
 const talker = express.Router();
 

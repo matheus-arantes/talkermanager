@@ -3,7 +3,7 @@ const path = require('path');
 
 const PATH_TALKER = path.resolve(__dirname, '../talker.json');
 
-//----------READ----------//
+// ----------READ---------- //
 
 const read = async () => {
     try {
@@ -13,27 +13,27 @@ const read = async () => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-//----------WRITE----------//
+// ----------WRITE---------- //
 
 const write = async (talker) => {
     try {
         const auxTalker = await read();
         const idNext = auxTalker.length + 1;
-        const newTalker =  {
+        const newTalker = {
             id: idNext,
             ...talker,
-        }
+        };
         auxTalker.push(newTalker);
         await fs.writeFile(PATH_TALKER, JSON.stringify(auxTalker));
         return newTalker;
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-//----------UPDATE----------//
+// ----------UPDATE---------- //
 
 const update = async (id, talkerUpdate) => {
     try {
@@ -46,23 +46,23 @@ const update = async (id, talkerUpdate) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-//----------DELETE----------//
+// ----------DELETE---------- //
 
 const deleteTalker = async (id) => {
     try {
         const file = await read();
         const filteredFile = file.filter((talker) => talker.id !== id);
-        await fs.writeFile(JSON.stringify(filteredFile))
+        await fs.writeFile(JSON.stringify(filteredFile));
     } catch (err) {
         console.log(err);
     }
-}
+};
 
 module.exports = {
     read,
     write,
     update,
-    deleteTalker
-}
+    deleteTalker,
+};
