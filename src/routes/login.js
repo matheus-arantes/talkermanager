@@ -1,5 +1,6 @@
 const express = require('express');
 const geraToken = require('../utils/tokenGenerator');
+const { emailValidator, passwordValidator } = require('../middlewares/loginValidator')
 
 const login = express.Router();
 
