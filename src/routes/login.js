@@ -4,7 +4,7 @@ const { emailValidator, passwordValidator } = require('../middlewares/loginValid
 
 const login = express.Router();
 
-login.post('/', (req, res) => {
+login.post('/', emailValidator, passwordValidator, (req, res) => {
     try {
         const token = geraToken();
         res.status(200).json({ token });
