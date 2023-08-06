@@ -1,6 +1,7 @@
 const express = require('express');
-const { read, readId, write, update } = require('../utils/fs');
+const { read, readId, write, update, deleteTalker } = require('../utils/fs');
 const talkerValidator = require('../middlewares/talkerValidator');
+const { isTokenValid } = require('../middlewares/tokenValidator');
 
 const talker = express.Router();
 
@@ -19,7 +20,7 @@ talker.get('/:id', async (req, res) => {
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-talker.post('/', talkerValidator, async (req, res) => {
+talker.post('/', isTokenValid, talkerValidator, async (req, res) => {
     try {
         const talkerWrite = await write(req.body);
         res.status(201).json(talkerWrite);
@@ -28,7 +29,7 @@ talker.post('/', talkerValidator, async (req, res) => {
     }
 });
 
-talker.put('/:id', talkerValidator, async (req, res) => {
+talker.put('/:id', isTokenValid, talkerValidator, async (req, res) => {
     try {
       const { id } = req.params;
         
@@ -45,5 +46,15 @@ talker.put('/:id', talkerValidator, async (req, res) => {
       console.log(err);
     }
   });
+
+talker.delete('/:id', isTokenValid, async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteTalker(Number(id));
+    res.status(204).end();
+  } catch (err) {
+    console.log(err);
+  }
+});
   
 module.exports = talker;

@@ -1,17 +1,3 @@
-const isTokenValid = (req, res, next) => {
-    const { authorization } = req.headers;
-    
-    if (!authorization) {
-        return res.status(401).json({ message: 'Token não encontrado' });
-    }
-
-    if (authorization.length !== 16 || typeof authorization !== 'string') {
-        return res.status(401).json({ message: 'Token inválido' });
-    }
-
-    next();
-};
-
 const isNameValid = (req, res, next) => {
     const { name } = req.body;
 
@@ -88,7 +74,6 @@ const isRateValid = (req, res, next) => {
 };
 
 module.exports = [
-    isTokenValid,
     isNameValid,
     isAgeValid,
     isTalkValid,

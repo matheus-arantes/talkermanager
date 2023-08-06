@@ -74,7 +74,7 @@ const deleteTalker = async (id) => {
     try {
         const file = await read();
         const filteredFile = file.filter((talker) => talker.id !== id);
-        await fs.writeFile(JSON.stringify(filteredFile));
+        await fs.writeFile(PATH_TALKER, JSON.stringify(filteredFile));
     } catch (err) {
         console.log(err);
     }
