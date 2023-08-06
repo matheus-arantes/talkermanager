@@ -15,7 +15,6 @@ const emailValidator = (req, res, next) => {
 };
 
 const passwordValidator = (req, res, next) => {
-    console.log('Executing passwordValidator');
     const { password } = req.body;
     
     if (!password) {

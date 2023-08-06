@@ -1,5 +1,6 @@
 const express = require('express');
-const { read, readId } = require('../utils/fs');
+const { read, readId, write } = require('../utils/fs');
+const talkerValidator = require('../middlewares/talkerValidator');
 
 const talker = express.Router();
 
@@ -16,6 +17,15 @@ talker.get('/:id', async (req, res) => {
         console.log(err);
     }
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+});
+
+talker.post('/', talkerValidator, async (req, res) => {
+    try {
+        const talkerWrite = await write(req.body);
+        res.status(201).json(talkerWrite);
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 module.exports = talker;
