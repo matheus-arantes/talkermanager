@@ -31,11 +31,9 @@ talker.post('/', talkerValidator, async (req, res) => {
 talker.put('/:id', talkerValidator, async (req, res) => {
     try {
       const { id } = req.params;
-      console.log('ID:', id);
-  
+        
       const talkerUpdate = await update(Number(id), req.body);
-      console.log('talkerUpdate:', talkerUpdate);
-  
+        
       if (!talkerUpdate) {
         return res.status(404).json({
           message: 'Pessoa palestrante não encontrada',
@@ -44,12 +42,8 @@ talker.put('/:id', talkerValidator, async (req, res) => {
   
       res.status(200).json(talkerUpdate);
     } catch (err) {
-      console.log('Error:', err);
-      res.status(500).json({
-        message: 'Ocorreu um erro durante a atualização do palestrante',
-      });
+      console.log(err);
     }
   });
   
-
 module.exports = talker;

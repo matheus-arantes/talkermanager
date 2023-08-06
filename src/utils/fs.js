@@ -51,7 +51,6 @@ const update = async (id, talkerUpdate) => {
     try {
       const talkerList = await read();
       const talkerIndex = talkerList.findIndex((talker) => talker.id === id);
-  
       if (talkerIndex === -1) {
         return undefined;
       }
@@ -62,9 +61,7 @@ const update = async (id, talkerUpdate) => {
       };
   
       talkerList[talkerIndex] = updatedTalker;
-  
       await fs.writeFile(PATH_TALKER, JSON.stringify(talkerList));
-  
       return updatedTalker;
     } catch (err) {
       console.log('Error:', err);
