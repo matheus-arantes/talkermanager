@@ -1,5 +1,4 @@
 const isTokenValid = (req, res, next) => {
-    console.log('Executing tokenValidator');
     const { authorization } = req.headers;
     
     if (!authorization) {
@@ -14,7 +13,6 @@ const isTokenValid = (req, res, next) => {
 };
 
 const isNameValid = (req, res, next) => {
-    console.log('Executing nameValidator');
     const { name } = req.body;
 
     if (!name) {
@@ -29,7 +27,6 @@ const isNameValid = (req, res, next) => {
 };
 
 const isAgeValid = (req, res, next) => {
-    console.log('Executing ageValidator');
     const { age } = req.body;
 
     if (!age) {
@@ -46,7 +43,6 @@ const isAgeValid = (req, res, next) => {
 };
 
 const isTalkValid = (req, res, next) => {
-    console.log('Executing talkValidator');
     const { talk } = req.body;
        
     if (!talk) {
@@ -57,7 +53,6 @@ const isTalkValid = (req, res, next) => {
 };
 
 const isWatchedValid = (req, res, next) => {
-    console.log('Executing watchedValidator');
     const { talk } = req.body;
     const { watchedAt } = talk;
     const regex = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
@@ -76,7 +71,6 @@ const isWatchedValid = (req, res, next) => {
 };
 
 const isRateValid = (req, res, next) => {
-    console.log('Executing rateValidator');
     const { talk } = req.body;
     const { rate } = talk;
 

@@ -49,17 +49,28 @@ const write = async (talker) => {
 
 const update = async (id, talkerUpdate) => {
     try {
-        const auxTalker = await read();
-        const filteredTalker = auxTalker.filter((talker) => talker.id !== id);
-        const newTalker = JSON.stringify(filteredTalker);
-        await fs.writeFile(PATH_TALKER, newTalker);
-        const updatedTalker = await write(talkerUpdate);
-        return updatedTalker;
+      const talkerList = await read();
+      const talkerIndex = talkerList.findIndex((talker) => talker.id === id);
+  
+      if (talkerIndex === -1) {
+        return undefined;
+      }
+  
+      const updatedTalker = {
+        id,
+        ...talkerUpdate,
+      };
+  
+      talkerList[talkerIndex] = updatedTalker;
+  
+      await fs.writeFile(PATH_TALKER, JSON.stringify(talkerList));
+  
+      return updatedTalker;
     } catch (err) {
-        console.log(err);
+      console.log('Error:', err);
     }
-};
-
+  };
+  
 // ----------DELETE---------- //
 
 const deleteTalker = async (id) => {
