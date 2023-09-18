@@ -7,6 +7,17 @@ const talker = express.Router();
 
 talker.get('/', async (_req, res) => res.status(200).json(await read()));
 
+talker.get('/search', isTokenValid, async (req, res) => {
+  try {
+    const { q } = req.query || '';
+    const file = read();
+    const filteredFile = file.filter(({ talker }) => talker.name.toLowerCase().includes(q.toLowerCase()));
+    res.status(200).json(filteredFile);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 talker.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -19,6 +30,7 @@ talker.get('/:id', async (req, res) => {
     }
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
+
 
 talker.post('/', isTokenValid, talkerValidator, async (req, res) => {
     try {
@@ -56,5 +68,5 @@ talker.delete('/:id', isTokenValid, async (req, res) => {
     console.log(err);
   }
 });
-  
+
 module.exports = talker;
